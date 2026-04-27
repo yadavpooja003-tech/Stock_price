@@ -1,0 +1,416 @@
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pooja - Resume</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        @media print {
+            body { margin: 0; padding: 0; }
+            .resume { page-break-after: avoid; box-shadow: none; }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 10px;
+        }
+        
+        .resume {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4A90A4 0%, #2C7A8C 100%);
+            color: white;
+            padding: 20px 28px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        
+        .header .tagline {
+            font-size: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 13px;
+            opacity: 0.95;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 25px;
+            font-size: 9px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 185px 1fr;
+            gap: 0;
+            height: calc(297mm - 90px);
+        }
+        
+        .left-column {
+            background: #f8f9fa;
+            padding: 16px 13px;
+            border-right: 3px solid #4A90A4;
+        }
+        
+        .right-column {
+            padding: 16px 20px;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #4A90A4 0%, #2C7A8C 100%);
+            color: white;
+            padding: 6px 11px;
+            margin: 0 -13px 11px -13px;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .right-column .section-title {
+            margin: 0 -20px 11px -20px;
+            padding: 6px 20px;
+        }
+        
+        .section {
+            margin-bottom: 15px;
+        }
+        
+        .left-column .section {
+            margin-bottom: 13px;
+        }
+        
+        .icon {
+            font-size: 13px;
+        }
+        
+        .education-item, .skill-item {
+            margin-bottom: 9px;
+            font-size: 9px;
+            line-height: 1.4;
+        }
+        
+        .education-item strong {
+            color: #2C7A8C;
+            font-size: 10px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .position-title {
+            font-weight: bold;
+            font-size: 10.5px;
+            color: #1a1a1a;
+            margin-bottom: 3px;
+        }
+        
+        .company-info {
+            font-size: 9px;
+            color: #555;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+        
+        .job-section {
+            margin-bottom: 12px;
+        }
+        
+        ul {
+            margin-left: 15px;
+            margin-top: 4px;
+        }
+        
+        li {
+            font-size: 9px;
+            line-height: 1.5;
+            margin-bottom: 3px;
+        }
+        
+        .competency-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .competency-list li {
+            padding-left: 13px;
+            position: relative;
+            margin-bottom: 5px;
+            font-size: 9px;
+        }
+        
+        .competency-list li:before {
+            content: "◆";
+            color: #4A90A4;
+            position: absolute;
+            left: 0;
+            font-size: 8px;
+        }
+        
+        .project-tech {
+            font-size: 8.5px;
+            color: #666;
+            margin-top: 2px;
+            margin-bottom: 4px;
+        }
+        
+        strong {
+            color: #2C7A8C;
+        }
+        
+        .objective {
+            background: #f0f8ff;
+            padding: 10px 12px;
+            border-left: 3px solid #4A90A4;
+            font-size: 9.5px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .personal-details {
+            background: linear-gradient(135deg, #4A90A4 0%, #2C7A8C 100%);
+            color: white;
+            padding: 11px 13px;
+            margin: 0 -13px 0 -13px;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .personal-details-title {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .personal-details .detail-row {
+            margin-bottom: 4px;
+        }
+
+        .personal-details .detail-row strong {
+            color: white;
+            display: inline-block;
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume">
+        <!-- Header -->
+        <div class="header">
+            <h1>POOJA</h1>
+            <div class="tagline">MCA | GNA UNIVERSITY</div>
+            <div class="contact-info">
+                <div>📱 +91 79738 65975</div>
+                <div>✉ yadavpooja@gmail.com</div>
+                <div>🔗 linkedin.com/in/pooja-a3460828a</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Education -->
+                <div class="section">
+                    <div class="section-title">
+                        <span class="icon">🎓</span> Education
+                    </div>
+                    <div class="education-item">
+                        <strong>MCA</strong>
+                        GNA University<br>
+                        2024-26
+                    </div>
+                    <div class="education-item">
+                        <strong>B.Sc. (IT)</strong>
+                        Lyallpur Khalsa College<br>
+                        2020-23
+                    </div>
+                    <div class="education-item">
+                        <strong>12th</strong>
+                        Punjab Board<br>
+                        90% | 2020
+                    </div>
+                    <div class="education-item">
+                        <strong>10th</strong>
+                        Punjab Board<br>
+                        2018
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="section">
+                    <div class="section-title">
+                        <span class="icon">💻</span> Technical Skills
+                    </div>
+                    <div class="skill-item">
+                        <strong>Programming Languages:</strong><br>
+                        Python, Java, SQL
+                    </div>
+                    <div class="skill-item">
+                        <strong>Python Libraries:</strong><br>
+                        Pandas, NumPy, TensorFlow, Keras
+                    </div>
+                    <div class="skill-item">
+                        <strong>Visualization:</strong><br>
+                        Matplotlib, Seaborn
+                    </div>
+                    <div class="skill-item">
+                        <strong>Web Framework:</strong><br>
+                        Django
+                    </div>
+                    <div class="skill-item">
+                        <strong>Tools:</strong><br>
+                        Jupyter, Google Colab, GitHub, MySQL
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="section">
+                    <div class="section-title">
+                        <span class="icon">💡</span> Soft Skills
+                    </div>
+                    <div class="skill-item">
+                        Communication<br>
+                         Time Management<br>
+                          Adaptability<br>
+                           Critical Thinking<br>
+                    </div>
+                </div>
+
+                <!-- Interests -->
+                <div class="section">
+                    <div class="section-title">
+                        <span class="icon">🎯</span> Interests
+                    </div>
+                    <div class="skill-item">
+                        Reading<br>
+                        Music<br>
+                        Gaming<br>
+                        Exploring New Technologies
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Academic Projects -->
+                  <div class="section">
+                    <div class="section-title">
+                        <span class="icon">📊</span> Academic Projects
+                    </div>
+                    
+                    <div cl•ss="job-section">
+                        <div class="position-title">Stock Market Price Prediction System</div>
+                        <div class="project-tech">
+                            <strong>Technologies:</strong> Python, Pandas, NumPy, TensorFlow/Keras, LSTM, Matplotlib
+                        </div>
+                        <p style="font-size: 9px; line-height: 1.5; margin-top: 4px;">
+                          • Built an LSTM-based model to predict stock prices using historical time-series dataCleaned and processed stock datasets for model training.<br>
+                          • Trained and tested the model to forecast future stock trends.<br>
+                          • Visualized predicted vs actual stock prices using Matplotlib.<br>
+                          • Evaluated model performance using multiple metrics including RMSE (Root Mean Square Error) and MAE (Mean Absolute Error) with proper
+train-test-validation splits to ensure reliability and generalization.
+                        </p>
+                           
+                    </div>
+
+                    <br>
+                    <div class="job-section">
+                        <div class="position-title">Real Estate Price Prediction Model</div>
+                        <div class="project-tech">
+                            <strong>Technologies:</strong> Python, Pandas, Scikit-learn, Seaborn, Matplotlib
+                        </div>
+                        <p style="font-size: 9px; line-height: 1.5; margin-top: 4px;">
+                         •  Developed a machine learning regression model to predict house prices.<br>
+                         •  Performed data cleaning and exploratory data analysis (EDA).<br>
+                         •  Applied feature engineering to improve prediction accuracy.<br>
+                         •  Trained multiple regression models and selected the best-performing one based on R² score.<br>
+                          •  Visualized pricing trends and key features using Seaborn and Matplotlib.<br>
+                         
+                        </p>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">
+                        <span class="icon">📜</span> Training & Workshops
+                    </div>
+                    
+                    <div class="job-section">
+                        <div class="position-title">Data Science Training <span style="float: right; font-weight: normal; font-size: 9px; color: #555;">45 Days | Jul 2025 - Aug 2025</span></div>
+                        <div class="company-info">O7 Services | MCA 3rd Semester</div>
+                        <ul>
+                            <li><strong>Foundations:</strong> Gained comprehensive knowledge in Python programming fundamentals data structures, algorithms, and core data science concepts through intensive hands-on training modules.</li>
+                            <li><strong>Data Processing:</strong> Learned data cleaning, preprocessing, transformation, and manipulation techniques using industry-standard libraries including Pandas and NumPy for efficient data handling.</li>
+                            <li><strong>Analysis & Modeling:</strong> Learned exploratory data analysis (EDA), statistical analysis, and built predictive models using supervised and unsupervised learning algorithms including regression, classification, and decision trees.</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-section">
+                        <div class="position-title">Full Stack Development Training <span style="float: right; font-weight: normal; font-size: 9px; color: #555;">6 Months | Aug 2023 - Jan 2024</span></div>
+                        <div class="company-info">TCIL-IT</div>
+                        <ul>
+                             <li><strong>Frontend Development:</strong> Learned HTML, CSS, and JavaScript for frontend development.</li>
+                            <li><strong>Backend Development:</strong> Completed training in Java programming and server-side development.</li>
+                            <li><strong>Database Management:</strong> Learned MySQL database design, SQL queries, and data management.</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-section">
+                        <div class="position-title">Python Django Framework Workshop</div>
+                        <div class="company-info">GNA University</div>
+                        <ul>
+                            <li><strong>Framework Basics:</strong> Learned Django web framework and MVT architecture pattern.</li>
+                            <li><strong>Core Features:</strong> Gained exposure to ORM, URL routing, and template rendering.</li>
+                            <li><strong>Implementation:</strong> Worked on creating basic web application components.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                    <div class="section-title">
+                        <span class="icon">👔</span> Position of Responsibility
+                    </div>
+                    <div class="skill-item" style="font-size: 8.5px; line-height: 1.5;">
+                        <div class="position-title">Event Organizer — TechFest 2025 (GNA University)
+                            <span style="float: right; font-weight: normal; font-size: 9px; color: #555;"></span></div>
+                        • Represented GNA University during an inter-college technical fest<br>
+                        • Guided and supported students from other colleges during event participation<br>
+                        • Coordinated event activities and ensured smooth execution<br>
+                        • Assisted in managing registrations, scheduling, and participant communication
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
