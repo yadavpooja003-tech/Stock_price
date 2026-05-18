@@ -709,15 +709,17 @@ def create_multivariate_sequences(scaled_data: np.ndarray, seq_len: int):
 # MODEL ARCHITECTURE — 3 LSTM layers + Dropout (matches your notebook)
 # =======================================================================================
 def build_lstm_model(seq_len: int, n_features: int) -> Sequential:
-    model = Sequential()
-    model.add(LSTM(units=100, return_sequences=True,
-                   input_shape=(seq_len, n_features)))
-    model.add(Dropout(0.2))
-    model.add(LSTM(units=100, return_sequences=True))
-    model.add(Dropout(0.2))
-    model.add(LSTM(units=100))
-    model.add(Dropout(0.2))
-    model.add(Dense(units=1))
+    from keras.layers import Input
+    model = Sequential([
+        Input(shape=(seq_len, n_features)),          # explicit Input layer — Keras 3 compatible
+        LSTM(units=100, return_sequences=True),
+        Dropout(0.2),
+        LSTM(units=100, return_sequences=True),
+        Dropout(0.2),
+        LSTM(units=100),
+        Dropout(0.2),
+        Dense(units=1),
+    ])
     model.compile(optimizer="adam", loss="mean_squared_error")
     return model
 
@@ -794,11 +796,26 @@ def load_or_create_model(ticker, api_key=""):
     model_path, scaler_path = get_model_paths(ticker)
 
     if os.path.exists(model_path) and os.path.exists(scaler_path):
-        model  = load_model(model_path)
-        scaler = joblib.load(scaler_path)
-        # sentiment is not stored — fetch fresh for prediction
-        sentiment = fetch_avg_sentiment(ticker, api_key) if api_key else 0.0
-        return model, scaler, sentiment
+        try:
+            model  = load_model(model_path)
+            scaler = joblib.load(scaler_path)
+            # sentiment is not stored — fetch fresh for prediction
+            sentiment = fetch_avg_sentiment(ticker, api_key) if api_key else 0.0
+            return model, scaler, sentiment
+        except Exception as load_err:
+            # Saved model was built with an older Keras/TF that used 'batch_shape'
+            # in InputLayer config (incompatible with Keras 3.x which uses 'shape').
+            # Delete stale files and fall through to retrain automatically.
+            st.warning(
+                f"⚠️ Saved model for **{ticker}** is incompatible with the current "
+                f"Keras version (`{load_err}`). "
+                "Deleting stale files and retraining automatically — this may take a minute…"
+            )
+            for p in [model_path, scaler_path]:
+                try:
+                    os.remove(p)
+                except OSError:
+                    pass
 
     # First time — train silently (no progress bar)
     with st.spinner(f"Training multivariate LSTM for {ticker} for the first time…"):
@@ -1785,10 +1802,20 @@ if selected_option == "News":
 
         news_data = response.json()
 
-        if "Note" in news_data:
-            st.warning(news_data["Note"])
-        elif "Information" in news_data:
-            st.warning(news_data["Information"])
+        # Detect Alpha Vantage rate-limit / premium-only responses
+        _av_limit_msg = news_data.get("Note", "") or news_data.get("Information", "")
+        _av_rate_limited = bool(_av_limit_msg)
+
+        if _av_rate_limited:
+            st.warning(
+                f"⚠️ **Alpha Vantage API limit reached** — {_av_limit_msg}\n\n"
+                "Showing general market headlines from free RSS feeds instead."
+            )
+            # ── Fallback: render RSS-based market headlines ──────────────────
+            rss_headlines = fetch_market_headlines(limit=12)
+            render_headline_cards(rss_headlines)
+            if not rss_headlines:
+                st.info("No RSS headlines available right now either. Try again shortly.")
         else:
             articles = news_data.get("feed", [])
             if not articles:
