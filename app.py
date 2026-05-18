@@ -1808,8 +1808,9 @@ if selected_option == "News":
 
         if _av_rate_limited:
             st.warning(
-                f"⚠️ **Alpha Vantage API limit reached** — {_av_limit_msg}\n\n"
-                "Showing general market headlines from free RSS feeds instead."
+                "📰 Alpha Vantage free-tier daily limit reached (25 requests/day). "
+                "Showing general market headlines from RSS feeds instead. "
+                "Upgrade at alphavantage.co/premium for unlimited access."
             )
             # ── Fallback: render RSS-based market headlines ──────────────────
             rss_headlines = fetch_market_headlines(limit=12)
