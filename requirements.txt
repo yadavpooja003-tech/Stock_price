@@ -1,7 +1,13 @@
 streamlit
 yfinance
 pandas
-numpy
-matplotlib
 plotly
+requests
+streamlit-option-menu
+streamlit-lottie
+numpy
+tensorflow
+keras
+joblib
 scikit-learn
+python-dotenv
